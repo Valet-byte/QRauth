@@ -1,0 +1,18 @@
+server:
+  port: 9630
+
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: root
+    password: toor
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    enabled: true
+
+secret: MySecret
+validTime: 900_000
+actualTime: 86400000
