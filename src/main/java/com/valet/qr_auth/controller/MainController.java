@@ -29,7 +29,6 @@ public class MainController {
 
     @PostMapping("/generatedPoint")
     public Point generatedNewPoint(@RequestBody Point point){
-        System.out.println(point);
         Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         point.setCreatorId(person.getId());
         return pointService.generatePoint(point);
@@ -38,16 +37,14 @@ public class MainController {
     @GetMapping("/login")
     public Person login(){
         Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         person.setPassword("NONE");
-
         return person;
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<Person> registration(@RequestBody Person person){
+    public ResponseEntity<?> registration(@RequestBody Person person){
         if (existUser(person.getPhone())){
-            return new ResponseEntity("Юзер уже есть в базе!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Юзер уже есть в базе!", HttpStatus.BAD_REQUEST);
         } else {
             person = personService.save(person);
             return new ResponseEntity<>(person, HttpStatus.OK);

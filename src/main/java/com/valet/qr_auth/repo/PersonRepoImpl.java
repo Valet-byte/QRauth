@@ -63,6 +63,9 @@ public class PersonRepoImpl implements PersonRepo {
 
     @Override
     public boolean existUser(String phone) {
+
+        System.out.println("-------------------- " + phone + " -----------------------------");
+
         final MapSqlParameterSource source = new MapSqlParameterSource();
         source.addValue("phone", phone);
         Long id = template.queryForObject("select id from public.person WHERE phone = :phone", source, Long.TYPE);

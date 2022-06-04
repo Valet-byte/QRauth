@@ -4,6 +4,7 @@ import com.valet.qr_auth.model.Person;
 import com.valet.qr_auth.repo.PersonRepo;
 import com.valet.qr_auth.service.interfaces.PersonService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepo repo;
 
     @Override
+    @Cacheable("user_exist")
     public boolean existUser(String phone) {
         try {
             return repo.existUser(phone);

@@ -22,7 +22,7 @@ public class Person implements UserDetails {
     private Long id;
     private String name;
     private String phone;
-    private String  password;
+    @JsonIgnore(value = false) private String  password;
     private String jobTitle;
     private String organization;
     private List<String> roles;

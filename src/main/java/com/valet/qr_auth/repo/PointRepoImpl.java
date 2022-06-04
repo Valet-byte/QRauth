@@ -55,9 +55,11 @@ public class PointRepoImpl implements PointRepo {
 
     @Override
     public Point findById(Long id) {
+
+        System.out.println("---------------- " + id + " ---------------------------");
+
         final MapSqlParameterSource source = new MapSqlParameterSource();
         source.addValue("id", id);
-        System.out.println(id);
 
         return template.queryForObject("SELECT * from public.point WHERE id = :id", source, mapper);
     }

@@ -3,8 +3,8 @@ package com.valet.qr_auth.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.valet.qr_auth.model.Point;
-import com.valet.qr_auth.repo.PointRepo;
 import com.valet.qr_auth.service.interfaces.JwtService;
+import com.valet.qr_auth.service.interfaces.PointService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,12 @@ public class JwtServiceImpl implements JwtService{
     @Value("${validTime}")
     private Long validTime;
 
-    private final PointRepo pointRepo;
+    private final PointService pointService;
 
     @Override
     public String generateToken(Long userId, Long pointId) {
 
-        Point point = pointRepo.findById(pointId);
+        Point point = pointService.findById(pointId, userId);
 
         if (point.getCreatorId().equals(userId) && point.getActualTime().isAfter(LocalDateTime.now().plusHours(3))){
             return JWT.create()

@@ -4,6 +4,7 @@ import com.valet.qr_auth.model.Point;
 import com.valet.qr_auth.repo.PointRepo;
 import com.valet.qr_auth.service.interfaces.PointService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,17 +15,6 @@ import java.util.List;
 public class PointServiceImpl implements PointService {
 
     private final PointRepo pointRepo;
-
-
-    @Override
-    public Point getPoint(Long personId, Long activeTime) {
-        return null;
-    }
-
-    @Override
-    public Point getPoint(Long personId) {
-        return Point.builder().actualTime(LocalDateTime.now().plusHours(3)).build();
-    }
 
     @Override
     public Point generatePoint(Point point) {
@@ -37,5 +27,16 @@ public class PointServiceImpl implements PointService {
     @Override
     public List<Point> getAllPoint(Long id) {
         return pointRepo.getAllPoint(id);
+    }
+
+    @Override
+    @Cacheable("point")
+    public Point findById(Long pointId, Long userId) {
+        Point point = pointRepo.findById(pointId);
+        if (point.getCreatorId().equals(userId)){
+            return point;
+        } else {
+            return null;
+        }
     }
 }

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.valet</groupId>
     <artifactId>QR_auth</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>QR_auth</name>
     <description>QR_auth</description>
     <properties>
@@ -31,6 +31,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Cache -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
