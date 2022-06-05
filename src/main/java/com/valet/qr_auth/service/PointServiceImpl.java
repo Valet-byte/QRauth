@@ -32,6 +32,7 @@ public class PointServiceImpl implements PointService {
     @Override
     @Cacheable("point")
     public Point findById(Long pointId, Long userId) {
+        System.out.println("----------- " + pointId + " - " + userId + " ----------------------");
         Point point = pointRepo.findById(pointId);
         if (point.getCreatorId().equals(userId)){
             return point;

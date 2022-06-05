@@ -13,6 +13,5 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.xml
     enabled: true
 
-secret: MySecret
-validTime: 900_000
-actualTime: 86400000
+secret: секретный_$2a$13$.C.OIsL4OWA6HB1NENTudeIz28Syv7VSR7TDwTo7yfqFw2vZD/JdC
+validTime: 120_000
