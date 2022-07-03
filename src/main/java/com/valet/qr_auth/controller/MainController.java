@@ -75,4 +75,34 @@ public class MainController {
         return personService.existUser(phone);
     }
 
+    @PostMapping("/changeOrganization")
+    public boolean changeOrganization(@RequestParam String organization){
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return personService.changeOrganization(person, organization);
+    }
+
+    @PostMapping("/changePhone")
+    public boolean changePhone(@RequestParam String phone){
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return personService.changePhone(person, phone);
+    }
+
+    @PostMapping("/changeName")
+    public boolean changeName(@RequestParam String name){
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return personService.changeName(person, name);
+    }
+
+    @PostMapping("/changePassword")
+    public boolean changePassword(@RequestBody String password){
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return personService.changePassword(person.getId(), password);
+    }
+
+    @DeleteMapping("/deleteAccount")
+    public boolean deleteAccount(){
+        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return recordService.deleteAllRecordByPersonId(person.getId()) &&
+                personService.deleteUser(person);
+    }
 }

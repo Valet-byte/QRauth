@@ -33,4 +33,61 @@ public class PersonServiceImpl implements PersonService {
         person1.setPassword("NONE");
         return person1;
     }
+
+    @Override
+    public boolean changeOrganization(Person person, String organization) {
+
+        if (organization == null || organization.length() == 0) {
+            return false;
+        }
+
+        if (person.getOrganization().equals(organization)){
+            return true;
+        } else {
+            String org = repo.changeOrganization(person.getId(), organization);
+            return organization.equals(org);
+        }
+    }
+
+    @Override
+    public boolean changePhone(Person person, String phone) {
+        if (phone == null || phone.length() == 0) {
+            return false;
+        }
+
+        if (person.getOrganization().equals(phone)){
+            return true;
+        } else {
+            String org = repo.changePhone(person.getId(), phone);
+            return phone.equals(org);
+        }
+    }
+
+    @Override
+    public boolean changeName(Person person, String name) {
+        if (name == null || name.length() == 0) {
+            return false;
+        }
+
+        if (person.getOrganization().equals(name)){
+            return true;
+        } else {
+            String org = repo.changeName(person.getId(), name);
+            return name.equals(org);
+        }
+    }
+
+    @Override
+    public boolean deleteUser(Person person) {
+        if (person != null){
+            return repo.deleteUser(person.getId());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean changePassword(Long id, String password) {
+        return repo.changePassword(id, encoder.encode(password));
+    }
 }

@@ -46,4 +46,18 @@ public class RecordRepoImpl implements RecordRepo {
 
         return (Long) Objects.requireNonNull(holder.getKeys()).get("id");
     }
+
+    @Override
+    public boolean deleteAllRecordByPersonId(Long id) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("userId", id);
+
+        try {
+            template.update("DELETE from public.record WHERE user_id = :userId", source);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

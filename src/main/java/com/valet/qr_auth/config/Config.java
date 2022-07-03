@@ -53,7 +53,8 @@ public class Config{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().httpBasic().and().authorizeRequests()
-                .antMatchers("/generatedPoint", "/generateToken", "/getAllRecord").hasAnyAuthority("ADMIN", "PROGRAMMER")
+                .antMatchers("/generatedPoint", "/generateToken", "/getAllRecord", "/changeOrganization"
+                , "/changePhone", "/changeName", "/deleteAccount", "/changePassword").hasAnyAuthority("ADMIN", "PROGRAMMER")
                 .antMatchers("/login", "/setRecord").authenticated()
                 .anyRequest().permitAll()
                 .and()

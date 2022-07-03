@@ -64,12 +64,96 @@ public class PersonRepoImpl implements PersonRepo {
     @Override
     public boolean existUser(String phone) {
 
-        System.out.println("-------------------- " + phone + " -----------------------------");
-
         final MapSqlParameterSource source = new MapSqlParameterSource();
         source.addValue("phone", phone);
         Long id = template.queryForObject("select id from public.person WHERE phone = :phone", source, Long.TYPE);
         return id != null;
+    }
+
+    @Override
+    public String changeOrganization(Long id, String organization) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("id", id);
+        source.addValue("organization", organization);
+
+        try {
+            KeyHolder holder = new GeneratedKeyHolder();
+            template.update("UPDATE public.person SET organization = :organization " +
+                    "WHERE id = :id", source, holder);
+
+            return (String) holder.getKeys().get("organization");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String changePhone(Long id, String phone) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("id", id);
+        source.addValue("phone", phone);
+
+        try {
+            KeyHolder holder = new GeneratedKeyHolder();
+            template.update("UPDATE public.person SET phone = :phone " +
+                    "WHERE id = :id", source, holder);
+
+            return (String) holder.getKeys().get("phone");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String changeName(Long id, String name) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("id", id);
+        source.addValue("name", name);
+
+        try {
+            KeyHolder holder = new GeneratedKeyHolder();
+            template.update("UPDATE public.person SET name = :name " +
+                    "WHERE id = :id", source, holder);
+
+            return (String) holder.getKeys().get("name");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean deleteUser(Long id) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("userId", id);
+
+        try {
+            template.update("DELETE FROM public.person WHERE id = :userId", source);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean changePassword(Long id, String encodePass) {
+        final MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("id", id);
+        source.addValue("pass", encodePass);
+
+        try {
+            KeyHolder holder = new GeneratedKeyHolder();
+            template.update("UPDATE public.person SET password = :pass " +
+                    "WHERE id = :id", source, holder);
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private java.sql.Array createSqlArray(String type, Object... data){

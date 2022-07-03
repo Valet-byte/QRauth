@@ -74,4 +74,15 @@ public class RecordServiceImpl implements RecordService {
             } else return null;
         } else return null;
     }
+
+    @Override
+    public boolean deleteAllRecordByPersonId(Long id) {
+        try {
+            return recordRepo.deleteAllRecordByPersonId(id);
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 }
