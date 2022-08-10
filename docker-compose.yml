@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  dbqr:
+    image: 'postgres:13.1-alpine'
+    container_name: dbqr
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+    ports:
+      - 5000:5432

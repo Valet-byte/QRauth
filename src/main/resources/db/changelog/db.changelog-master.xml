@@ -6,7 +6,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <include file="db/changelog/v2/31-07-2022--admin.xml"/>
-    <include file="db/changelog/v2/31-07-2022--record.xml"/>
+    <include file="db/changelog/v2/31-07-2022--user.xml"/>
 
 </databaseChangeLog>

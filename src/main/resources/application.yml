@@ -1,17 +1,19 @@
 server:
-  port: 9630
+  port: 9631
 
 spring:
+
+
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
-    url: jdbc:postgresql://localhost:5432/postgres
-    user: postgres
-    password: adminpassword
+    url: jdbc:postgresql://localhost:5000/postgres
+    user: root
+    password: toor
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/postgres
-    username: customuser
-    password: custompassword
+    url: r2dbc:postgresql://localhost:5000/postgres
+    username: root
+    password: toor
 
   output:
     ansi:
