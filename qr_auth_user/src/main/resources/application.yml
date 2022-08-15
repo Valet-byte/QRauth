@@ -1,0 +1,42 @@
+server:
+  port: 9631
+
+spring:
+  application:
+    name: USER
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5000/postgres
+    username: root
+    password: toor
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: valetbyte22@gmail.com
+    password: "gilykyftbbdpktsd"
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    sender:
+      email: valetbyte22@gmail.com
+      text: Valet Byte
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+
+
+
+secret: секретный_$2a$13$.C.OIsL4OWA6HB1NENTudeIz28Syv7VSR7TDwTo7yfqFw2vZD/JdC
+validTime: 120_000
+host: localhost

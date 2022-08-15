@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  dbqr:
+    image: 'bitnami/postgresql'
+    container_name: db
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=toor
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD=toor
+    ports:
+      - 5000:5432
