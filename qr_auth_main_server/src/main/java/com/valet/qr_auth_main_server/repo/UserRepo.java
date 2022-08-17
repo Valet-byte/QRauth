@@ -1,6 +1,6 @@
-package com.valet.qr_auth_user.repo;
+package com.valet.qr_auth_main_server.repo;
 
-import com.valet.qr_auth_user.model.User;
+import com.valet.qr_auth_main_server.model.User;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.r2dbc.repository.Modifying;
 import org.springframework.data.r2dbc.repository.Query;
@@ -8,12 +8,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 public interface UserRepo extends ReactiveCrudRepository<User, Long> {
-
-    @Query("SELECT users.*, organization, roles FROM users JOIN roles ON " +
-            "roles.id = users.role_id " +
-            "JOIN organization ON " +
-            "organization.id = users.organization_id " +
-            "WHERE users.email = :email")
+    @Query("SELECT * FROM users WHERE users.email = :email")
     Mono<User> findByEmail(@Param("email") String username);
 
     @Modifying

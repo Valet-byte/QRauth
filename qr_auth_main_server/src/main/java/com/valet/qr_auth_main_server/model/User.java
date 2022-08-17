@@ -1,4 +1,4 @@
-package com.valet.qr_auth_user.model;
+package com.valet.qr_auth_main_server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
