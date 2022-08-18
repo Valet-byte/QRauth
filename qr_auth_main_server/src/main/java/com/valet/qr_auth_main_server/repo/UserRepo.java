@@ -22,4 +22,7 @@ public interface UserRepo extends ReactiveCrudRepository<User, Long> {
     @Modifying
     @Query("UPDATE users SET password = :password WHERE id = :id")
     Mono<Integer> changePasswordById(@Param(value = "id") Long id,@Param(value = "password") String password);
+
+    @Query("SELECT EXISTS (SELECT id FROM users WHERE email = :email)")
+    Mono<Boolean> existUser(@Param("email") String email);
 }

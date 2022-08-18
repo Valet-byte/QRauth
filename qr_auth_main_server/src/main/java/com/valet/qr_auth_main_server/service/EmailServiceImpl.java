@@ -2,6 +2,7 @@ package com.valet.qr_auth_main_server.service;
 
 import com.valet.qr_auth_main_server.service.interfaces.EmailService;
 import lombok.AllArgsConstructor;
+import org.apache.http.client.utils.URIBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -13,12 +14,10 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSimpleEmail(String toAddress, String subject, String message) {
-        System.out.println("-----------------------------------------------------------------");
         builder.build()
-                .post().uri("http://EMAIL/send")
-                .attribute("toAddress", toAddress)
-                .attribute("subject", subject)
-                .attribute("message", message)
+                .post().uri("http://EMAIL/send?toAddress=" + toAddress + "&subject=" + subject +
+                        "&message=" + message)
+
                 .retrieve()
                 .bodyToMono(Boolean.class).log().subscribe(System.out::println);
     }

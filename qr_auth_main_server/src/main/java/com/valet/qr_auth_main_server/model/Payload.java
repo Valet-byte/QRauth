@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Payload {
-    private String organization;
+    private Long organization;
     private double x;
     private double y;
     private int radius;

@@ -1,5 +1,6 @@
 package com.valet.qr_auth_main_server.service;
 
+import com.valet.qr_auth_main_server.repo.OrganizationRepo;
 import com.valet.qr_auth_main_server.repo.RoleRepo;
 import com.valet.qr_auth_main_server.repo.UserRepo;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsServic
 
     private final UserRepo repo;
     private final RoleRepo roleRepo;
+    private final OrganizationRepo organizationRepo;
 
     @Override
     public Mono<UserDetails> findByUsername(String username) {

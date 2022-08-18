@@ -27,4 +27,22 @@ public class RegistrationServiceImpl implements RegistrationService {
     public Mono<Void> deleteUser(Long id) {
         return null;
     }
+
+    @Override
+    public Mono<Void> changeRoleUser(Long userId, Long roleId) {
+        return builder
+                .build().put()
+                .uri("http://REGISTRATION/changeRoleUser?userId=" + userId + "&roleId=" + roleId)
+                .retrieve()
+                .bodyToMono(Void.class).log();
+    }
+
+    @Override
+    public Mono<Void> changeOrganizationUser(Long userId, long orgId) {
+        return builder
+                .build().put()
+                .uri("http://REGISTRATION/changeOrganizationUser?userId=" + userId + "&orgId=" + orgId)
+                .retrieve()
+                .bodyToMono(Void.class).log();
+    }
 }

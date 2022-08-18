@@ -7,4 +7,7 @@ import reactor.core.publisher.Mono;
 public interface RegistrationService {
     public Mono<User> registration(User user);
     public Mono<Void> deleteUser(Long id);
+    Mono<Void> changeRoleUser(Long userId, Long roleId);
+
+    Mono<Void> changeOrganizationUser(Long userId, long value);
 }
