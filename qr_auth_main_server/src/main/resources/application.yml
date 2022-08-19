@@ -24,4 +24,4 @@ spring:
 
 secret: ?????????_$2a$13$.C.OIsL4OWA6HB1NENTudeIz28Syv7VSR7TDwTo7yfqFw2vZD/JdC
 validTime: 120_000
-host: localhost
+host: "localhost:9630"

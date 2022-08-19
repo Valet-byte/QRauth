@@ -2,7 +2,6 @@ package com.valet.qr_auth_main_server.service;
 
 import com.valet.qr_auth_main_server.service.interfaces.EmailService;
 import lombok.AllArgsConstructor;
-import org.apache.http.client.utils.URIBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 

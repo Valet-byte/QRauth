@@ -1,6 +1,7 @@
 package com.valet.qr_registration_server.repo;
 
 import com.valet.qr_registration_server.model.User;
+import lombok.NonNull;
 import org.springframework.data.r2dbc.repository.Modifying;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +21,7 @@ public interface UserRepo extends ReactiveCrudRepository<User, Long> {
 
     @Modifying
     @Query("UPDATE users SET job_title = :jobTitle WHERE id = :id")
-    Mono<Integer> changeJobTitleById(@Param(value = "jobTitle") String jobTitle,@Param(value = "id")  Long id);
+    Mono<Integer> changeJobTitleById(@Param(value = "id")  Long id, @Param(value = "jobTitle") String jobTitle);
 
     @Modifying
     @Query("UPDATE users SET password = :password WHERE id = :id")
@@ -28,8 +29,9 @@ public interface UserRepo extends ReactiveCrudRepository<User, Long> {
 
     @Modifying
     @Query("UPDATE users SET role_id = :roleId WHERE id = :userId")
-    Mono<Void> changeRoleUser(@Param("userId") Long userId, @Param("roleId") Long roleId);
+    Mono<Integer> changeRoleUser(@Param("userId") Long userId, @Param("roleId") Long roleId);
     @Modifying
     @Query("UPDATE users SET organization_id = :organization_id WHERE id = :userId")
-    Mono<Void> changeOrganizationUser(@Param("userId") Long userId, @Param("organization_id") Long orgId);
+    Mono<Boolean> changeOrganizationUser(@Param("userId") Long userId, @Param("organization_id") Long orgId);
+
 }

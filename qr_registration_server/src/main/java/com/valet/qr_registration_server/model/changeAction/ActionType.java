@@ -1,4 +1,4 @@
-package com.valet.qr_auth_main_server.model.changeAction;
+package com.valet.qr_registration_server.model.changeAction;
 
 public enum ActionType {
     CHANGE_PASSWORD, CHANGE_USERNAME, CHANGE_JOB_TITLE,

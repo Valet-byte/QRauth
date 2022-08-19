@@ -6,7 +6,6 @@ import reactor.core.publisher.Mono;
 
 public interface OrganizationService {
     Flux<String> getAllOrganizationName();
-    Mono<Organization> createOrganization(Long creatorId, String organizationName);
     Mono<Void> deleteOrganization(Long organizationId);
     Mono<Void> deleteOrganization(String organizationName);
 

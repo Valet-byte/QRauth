@@ -4,7 +4,7 @@ server:
 spring:
 
   application:
-    name: REGISTRATION
+    name: "DBSERVER"
 
   r2dbc:
     url: r2dbc:postgresql://localhost:5000/postgres

@@ -1,8 +1,9 @@
 package com.valet.qr_auth_main_server.controller;
 
-import com.valet.qr_auth_main_server.model.Organization;
 import com.valet.qr_auth_main_server.model.Record;
 import com.valet.qr_auth_main_server.model.User;
+import com.valet.qr_auth_main_server.model.changeAction.Action;
+import com.valet.qr_auth_main_server.model.changeAction.ActionType;
 import com.valet.qr_auth_main_server.service.interfaces.ActionService;
 import com.valet.qr_auth_main_server.service.interfaces.OrganizationService;
 import com.valet.qr_auth_main_server.service.interfaces.RecordService;
@@ -16,10 +17,10 @@ import reactor.core.publisher.Mono;
 @RestController
 @AllArgsConstructor
 public class MainController {
-    private final ActionService actionService;
     private final TokenService tokenService;
     private final RecordService recordService;
     private final OrganizationService organizationService;
+    private final ActionService actionService;
 
     @GetMapping("/login")
     public Mono<User> login(@AuthenticationPrincipal Mono<User> user) {
@@ -27,12 +28,6 @@ public class MainController {
             a.setPassword("NONE");
             return a;
         });
-    }
-
-    @PostMapping("/registration")
-    public Mono<Boolean> registration(@RequestBody User user) {
-        System.out.println(user);
-        return actionService.registration(user);
     }
 
     @GetMapping("/getToken")
@@ -47,8 +42,9 @@ public class MainController {
     }
 
     @PostMapping("/createOrganization")
-    public Mono<Organization> createOrganization(@RequestParam String organizationName, @AuthenticationPrincipal User user){
-        return organizationService.createOrganization(user.getId(), organizationName);
+    public Mono<Boolean> createOrganization(@RequestParam String organizationName, @AuthenticationPrincipal User user){
+        Action action = actionService.createActionNotRegistrationInRedis(user.getId(), organizationName, ActionType.CREATE_ORGANIZATION);
+        return actionService.doAction(action);
     }
 
     @GetMapping("/getAllOrganization")
@@ -61,6 +57,7 @@ public class MainController {
             @RequestParam Long userId,
             @AuthenticationPrincipal User user
     ){
-
+        return actionService.doAction(actionService.createActionNotRegistrationInRedis(userId, "2", ActionType.CHANGE_ROLE));
     }
+
 }

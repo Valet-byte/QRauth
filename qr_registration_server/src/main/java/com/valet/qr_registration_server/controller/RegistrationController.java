@@ -1,7 +1,7 @@
 package com.valet.qr_registration_server.controller;
 
-import com.valet.qr_registration_server.model.User;
-import com.valet.qr_registration_server.serice.UserService;
+import com.valet.qr_registration_server.model.changeAction.Action;
+import com.valet.qr_registration_server.service.ActionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -10,32 +10,11 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class RegistrationController {
 
-    private final UserService userService;
+    private final ActionService actionService;
 
-    @PostMapping("/registration")
-    public Mono<User> registration(@RequestBody User user){
-        System.out.println(user);
-        return userService.registration(user);
+    @PostMapping("/doAction")
+    public Mono<Boolean> registration(@RequestBody Action action){
+        return actionService.doAction(action);
     }
 
-    @DeleteMapping("/deleteUser")
-    public Mono<Void> deleteUser(@RequestParam Long userId){
-        return userService.delete(userId);
-    }
-
-    @PutMapping("/changeRoleUser")
-    public Mono<Void> changeRoleUser(
-            @RequestParam Long userId,
-            @RequestParam Long roleId
-    ){
-        return userService.changeRoleUser(userId, roleId);
-    }
-
-    @PutMapping("/changeOrganizationUser")
-    public Mono<Void> changeOrganizationUser(
-            @RequestParam Long userId,
-            @RequestParam Long orgId
-    ){
-        return userService.changeOrganizationUser(userId, orgId);
-    }
 }

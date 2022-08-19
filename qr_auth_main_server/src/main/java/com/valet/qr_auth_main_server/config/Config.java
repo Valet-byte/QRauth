@@ -1,14 +1,14 @@
 package com.valet.qr_auth_main_server.config;
 
-import org.apache.http.client.utils.URIBuilder;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
@@ -24,7 +24,7 @@ public class Config {
     public SecurityWebFilterChain securityWebFilterChain(
             ServerHttpSecurity http) {
         return http.csrf().disable().httpBasic().and().authorizeExchange()
-                .pathMatchers("/registration", "/do/**", "/getAllOrganization").permitAll()
+                .pathMatchers("/registration", "/do/**", "/getAllOrganization", "/test").permitAll()
                 .pathMatchers("/getToken").hasAuthority("ADMIN")
                 .pathMatchers("/setRecord").hasAuthority("USER")
                 .pathMatchers("/addAdmin").hasAuthority("ORGANIZATION_CREATOR")
@@ -39,7 +39,8 @@ public class Config {
     }
 
     @Bean
-    public URIBuilder uriBuilder(){
-        return new URIBuilder();
+    @LoadBalanced
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 }

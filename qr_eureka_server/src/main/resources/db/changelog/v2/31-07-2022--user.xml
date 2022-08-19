@@ -3,7 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="31-07-2022--user--003" author="Valet-Byte">
+    <changeSet id="31-07-2022--user--004" author="Valet-Byte">
 
         <createTable tableName="users">
             <column name="id"
@@ -20,9 +20,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="job_title" type="text">
-                <constraints nullable="false"/>
-            </column>
+            <column name="job_title" type="text"/>
 
             <column name="phone" type="text"/>
 
