@@ -1,6 +1,7 @@
 package com.valet.qr_auth_main_server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.valet.qr_auth_main_server.model.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -68,5 +69,14 @@ public class User implements UserDetails {
     @JsonIgnore
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserDTO getDTO(){
+        return UserDTO.builder()
+                .email(this.email)
+                .jobTitle(this.jobTitle)
+                .name(this.name)
+                .phone(this.phone)
+                .build();
     }
 }

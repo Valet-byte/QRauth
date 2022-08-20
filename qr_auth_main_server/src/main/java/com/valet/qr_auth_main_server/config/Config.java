@@ -1,6 +1,5 @@
 package com.valet.qr_auth_main_server.config;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +26,7 @@ public class Config {
                 .pathMatchers("/registration", "/do/**", "/getAllOrganization", "/test").permitAll()
                 .pathMatchers("/getToken").hasAuthority("ADMIN")
                 .pathMatchers("/setRecord").hasAuthority("USER")
-                .pathMatchers("/addAdmin").hasAuthority("ORGANIZATION_CREATOR")
+                .pathMatchers("/addAdmin", "/addToMyCommand").hasAnyAuthority("ORGANIZATION_CREATOR", "ADMIN")
                 .anyExchange().authenticated()
                 .and().build();
     }
