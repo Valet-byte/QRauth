@@ -10,9 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public interface RecordRepo extends ReactiveCrudRepository<Record, Long> {
-    @Query("SELECT * FROM Record r WHERE r.admin_id = :adminId AND r.date_time::date >= :from AND r.date_time::date <= :to AND " +
-            "r.date_time::time < :arrivalTime")
-    Flux<Record> findAllRecordWhoMadeFromAndTo(Long adminId, LocalDate from, LocalDate to, LocalTime arrivalTime);
-    @Query("SELECT count(*) FROM Record r WHERE r.admin_id = :adminId AND r.date_time::date >= :from AND r.date_time::date <= :to")
-    Mono<Integer> countRecordFromToDate(Long adminId, LocalDate from, LocalDate to);
+    @Query("SELECT * FROM Record r WHERE r.admin_id = :adminId AND r.date_time::date >= :from AND r.date_time::date <= :to")
+    Flux<Record> findAllRecordWhoMadeFromAndTo(Long adminId, LocalDate from, LocalDate to);
 }

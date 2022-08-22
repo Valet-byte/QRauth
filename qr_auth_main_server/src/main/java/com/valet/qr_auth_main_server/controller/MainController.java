@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @RestController
 @AllArgsConstructor
 public class MainController {
@@ -31,17 +34,21 @@ public class MainController {
     }
 
     @GetMapping("/getToken")
-    public Mono<String> getToken(@RequestParam double x, @RequestParam double y, @RequestParam int radius, @AuthenticationPrincipal User user) {
-        return tokenService.createToken(x, y, radius, user.getId(), user.getOrganization().getId());
+    public Mono<String> getToken(@RequestParam double x,
+                                 @RequestParam double y,
+                                 @RequestParam int radius,
+                                 @RequestParam LocalDateTime now,
+                                 @AuthenticationPrincipal User user) {
+        return tokenService.createToken(x, y, radius, user.getId(), user.getOrganization().getId(), now);
     }
 
-    @PostMapping("/setRecord")
-    public Mono<Record> setRecord(@RequestParam double x,
+    @PostMapping("/addRecord")
+    public Mono<Boolean> setRecord(@RequestParam double x,
                                   @RequestParam double y,
                                   @RequestParam String token,
+                                  @RequestParam LocalDateTime now,
                                   @AuthenticationPrincipal User user){
-        System.out.println(user);
-        return recordService.addRecord(x, y, token, user);
+        return recordService.addRecord(x, y, token, user, now);
     }
 
     @PostMapping("/createOrganization")
@@ -78,13 +85,23 @@ public class MainController {
     public Flux<UserDTO> getMyCommand(
             @AuthenticationPrincipal User user
     ){
-        try {
             return commandService.getMyCommand(user.getId());
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+    }
 
+    @GetMapping("/getAllRecord")
+    public Flux<Record> getAllRecord(@RequestBody MyTime time,
+                                     @AuthenticationPrincipal User user){
+        return recordService.getAllRecord(user.getId(), time.from, time.to);
+    }
+
+    @GetMapping("/test")
+    public LocalDateTime test(){
+        return LocalDateTime.now();
+    }
+
+    static class MyTime{
+        LocalDate from;
+        LocalDate to;
     }
 
 }

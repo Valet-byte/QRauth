@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class TokenServiceImpl implements TokenService {
     private Long validTime;
 
     @Override
-    public Mono<String> createToken(double x, double y, int radius, long adminId, Long organization) {
+    public Mono<String> createToken(double x, double y, int radius, long adminId, Long organization, LocalDateTime now) {
         Map<String, Object> payload = new HashMap<>(5);
         payload.put("x", x);
         payload.put("y", y);
@@ -32,7 +33,7 @@ public class TokenServiceImpl implements TokenService {
 
         return Mono.just(JWT.create()
                 .withPayload(payload)
-                .withExpiresAt(new Date(System.currentTimeMillis() + validTime))
+                .withExpiresAt(new Date(now.getNano() + validTime))
                 .sign(Algorithm.HMAC512(secret.getBytes(StandardCharsets.UTF_8))));
     }
 }

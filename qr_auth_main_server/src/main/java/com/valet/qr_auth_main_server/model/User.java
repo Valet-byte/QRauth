@@ -70,7 +70,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
+    @JsonIgnore
     public UserDTO getDTO(){
         return UserDTO.builder()
                 .email(this.email)

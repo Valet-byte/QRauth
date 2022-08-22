@@ -16,7 +16,6 @@ public class ChangeController {
     private final ActionService actionService;
     private final PasswordEncoder encoder;
 
-
     @GetMapping("/do/{actionId}")
     public Mono<Boolean> doAction(@PathVariable String actionId){
         return actionService.doAction(actionId);
