@@ -14,7 +14,13 @@ public class RegistrationController {
 
     @PostMapping("/doAction")
     public Mono<Boolean> registration(@RequestBody Action action){
-        return actionService.doAction(action);
+        try {
+            return actionService.doAction(action);
+        } catch (Exception e){
+            e.printStackTrace();
+            return Mono.just(false);
+        }
+
     }
 
 }

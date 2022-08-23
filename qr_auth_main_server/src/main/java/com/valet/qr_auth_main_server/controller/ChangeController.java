@@ -55,4 +55,14 @@ public class ChangeController {
         user.setPassword(encoder.encode(user.getPassword()));
         return Mono.just(actionService.createAndSendAction(null, user, ActionType.REGISTRATION, user.getEmail()));
     }
+
+    @DeleteMapping("/deleteUser")
+    public Mono<Boolean> deleteUser(@AuthenticationPrincipal User user){
+        return Mono.just(actionService.createAndSendAction(user.getId(), user, ActionType.DELETE_USER, user.getEmail()));
+    }
+
+    @DeleteMapping("/deleteOrganization")
+    public Mono<Boolean> deleteOrganization(@AuthenticationPrincipal User user){
+        return Mono.just(actionService.createAndSendAction(user.getId(), user, ActionType.DELETE_ORGANIZATION, user.getEmail()));
+    }
 }

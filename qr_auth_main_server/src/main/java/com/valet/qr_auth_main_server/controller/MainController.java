@@ -94,11 +94,6 @@ public class MainController {
         return recordService.getAllRecord(user.getId(), time.from, time.to);
     }
 
-    @GetMapping("/test")
-    public LocalDateTime test(){
-        return LocalDateTime.now();
-    }
-
     static class MyTime{
         LocalDate from;
         LocalDate to;

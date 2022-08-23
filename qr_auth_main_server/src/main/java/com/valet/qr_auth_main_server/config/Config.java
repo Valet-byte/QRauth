@@ -24,9 +24,9 @@ public class Config {
             ServerHttpSecurity http) {
         return http.csrf().disable().httpBasic().and().authorizeExchange()
                 .pathMatchers("/registration", "/do/**", "/getAllOrganization", "/test").permitAll()
-                .pathMatchers("/getToken").hasAnyAuthority("ADMIN", "ORGANIZATION_CREATOR")
+                .pathMatchers("/getToken", "/addAdmin", "/addToMyCommand", "/getMyCommand").hasAnyAuthority("ADMIN", "ORGANIZATION_CREATOR")
                 .pathMatchers("/setRecord").hasAuthority("USER")
-                .pathMatchers("/addAdmin", "/addToMyCommand").hasAnyAuthority("ORGANIZATION_CREATOR", "ADMIN")
+                .pathMatchers("/deleteOrganization").hasAnyAuthority("ORGANIZATION_CREATOR" )
                 .anyExchange().authenticated()
                 .and().build();
     }
