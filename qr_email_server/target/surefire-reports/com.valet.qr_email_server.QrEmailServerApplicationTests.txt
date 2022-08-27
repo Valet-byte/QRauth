@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.valet.qr_email_server.QrEmailServerApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.072 s - in com.valet.qr_email_server.QrEmailServerApplicationTests

@@ -19,7 +19,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: valetbyte22@gmail.com
-    password: "gilykyftbbdpktsd"
+    password: "*******"
     test-connection: true
     properties:
       mail:
