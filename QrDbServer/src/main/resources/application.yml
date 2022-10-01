@@ -1,0 +1,22 @@
+server:
+  port: 9880
+
+spring:
+  application:
+    name: "db_server"
+
+  data:
+    mongodb:
+      port: 27017
+
+  kafka:
+    bootstrap-servers:
+      - localhost:8084
+      - localhost:8083
+    consumer:
+      auto-offset-reset: earliest
+      group-id: qr_auth
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+defaultRole: USER

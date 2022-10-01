@@ -1,0 +1,27 @@
+server:
+  port: 9630
+
+
+spring:
+  application:
+    name: MAIN
+
+  data:
+    mongodb:
+      port: 27017
+
+  kafka:
+    bootstrap-servers:
+      - localhost:8084
+      - localhost:8083
+    consumer:
+      auto-offset-reset: earliest
+      group-id: qr_auth
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+
+secret: секРетный_$2a$13$.C.OIsL4OWA6HB1NENTudeIz28Syv7VSR7TDwTo7yfqFw2vZD/JdC
+validTime: 120
+host: http://localhost:9630/do/

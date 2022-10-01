@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers:
+      - localhost:8084
+      - localhost:8083
+      - localhost:8085
+    consumer:
+      auto-offset-reset: earliest
+      group-id: db_group
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+secret: секРетный_$2a$13$.C.OIsL4OWA6HB1NENTudeIz28Syv7VSR7TDwTo7yfqFw2vZD/JdC
+validTime: 1
